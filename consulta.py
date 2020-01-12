@@ -1,16 +1,20 @@
+#Python Scripts
+#Milton
+#consumo do API da fixer
 #Importação dos módulos
+
 import requests
 import json
 import pandas
-#consumo do API da fixer
+
 url = "http://data.fixer.io/api/latest?access_key=1a6fb5944548d113b88b19e9cd503952"
-resposta = requests.get (url)
+resposta = requests.get (url) # resposta da URL
 print(resposta)
 if resposta.status_code == 200:
     print("Acesso realizado com sucesso")
     print("Buscando Informações...")
     dados = resposta.json()
-    dolar_real = round(dados['rates']['BRL']/dados['rates']['USD'], 2)
+    dolar_real = round(dados['rates']['BRL']/dados['rates']['USD'], 2) # conversão e arredondamento dos valores
     euro_real = round(dados['rates']['BRL']/dados['rates']['EUR'], 2)
     libra_real = round(dados['rates']['BRL']/dados['rates']['GBP'], 2)
     btc_real = round(dados['rates']['BRL']/dados['rates']['BTC'], 2)
