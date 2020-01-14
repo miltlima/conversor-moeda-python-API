@@ -1,14 +1,16 @@
-import requests
+# -*- coding: utf-8 -*-
+
+import requests     
 import json
-import pandas as pd
 import decimal
+import pandas as pd
 
 url = "http://data.fixer.io/api/latest?access_key=1a6fb5944548d113b88b19e9cd503952"
 resposta = requests.get (url) # resposta da URL
 print(resposta)
 if resposta.status_code == 200:
     print("Acesso realizado com sucesso")
-    print("Buscando Informações...")
+    print("Buscando Informações")
     dados = resposta.json()
     dolar_real = round(dados['rates']['BRL']/dados['rates']['USD'], 2) # conversão e arredondamento dos valores
     euro_real = round(dados['rates']['BRL']/dados['rates']['EUR'], 2)
