@@ -1,11 +1,7 @@
-#Python Scripts
-#Milton
-#consumo do API da fixer
-#Importação dos módulos
-
 import requests
 import json
-import pandas
+import pandas as pd
+import decimal
 
 url = "http://data.fixer.io/api/latest?access_key=1a6fb5944548d113b88b19e9cd503952"
 resposta = requests.get (url) # resposta da URL
@@ -18,13 +14,14 @@ if resposta.status_code == 200:
     euro_real = round(dados['rates']['BRL']/dados['rates']['EUR'], 2)
     libra_real = round(dados['rates']['BRL']/dados['rates']['GBP'], 2)
     btc_real = round(dados['rates']['BRL']/dados['rates']['BTC'], 2)
-    print("Dolar Americano: ", dolar_real, "reais")
-    print("Euro ", euro_real, "reais")
-    print("Libra ", libra_real, "reais")
-    print("Bitcoin",btc_real, "reais")
+    print("1 Dolar Americano vale: ", dolar_real, "reais")
+    print("1 Euro vale ", euro_real, "reais")
+    print("1 Libra vale ", libra_real, "reais")
+    print("1 Bitcoin vale",btc_real, "reais")
     print("exportando resultado em tabela excel")
-    tela = pandas.DataFrame({'Moedas':['Dolar','Euro','Libra','Bitcoin'],'Valores':[dolar_real, euro_real,libra_real, btc_real]})
-    tela.to_csv('valores.csv')
+    #tela = pd.DataFrame({[dolar_real,euro_real,libra_real,btc_real], columns=['Dolar','Euro','Libra','Bitcoin']})
+    tela = pd.DataFrame({'Moedas':['Dolar','Euro','Libra','Bitcoin'],'Valores':[dolar_real, euro_real,libra_real, btc_real]})
+    tela.to_csv('valores.csv', index=False, sep=";",decimal=",")
     print('Arquivos exportados com sucesso')
 else:
     print("Erro ao ler dados")
